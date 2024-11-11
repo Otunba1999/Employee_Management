@@ -1,0 +1,151 @@
+is_global = true
+build_property.EnableAotAnalyzer = 
+build_property.EnableSingleFileAnalyzer = 
+build_property.EnableTrimAnalyzer = false
+build_property.IncludeAllContentForSelfExtract = 
+build_property.TargetFramework = net8.0
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = 
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = false
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = browser
+build_property.RootNamespace = Client
+build_property.RootNamespace = Client
+build_property.ProjectDir = /home/oladapo/DotNet/Employee Mangement/Client/
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = false
+build_property.RazorLangVersion = 8.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = /home/oladapo/DotNet/Employee Mangement/Client
+build_property._RazorSourceGeneratorDebug = 
+
+[/home/oladapo/DotNet/Employee Mangement/Client/App.razor]
+build_metadata.AdditionalFiles.TargetPath = QXBwLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/oladapo/DotNet/Employee Mangement/Client/Pages/AdminPages/TableBanner.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvQWRtaW5QYWdlcy9UYWJsZUJhbm5lci5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/oladapo/DotNet/Employee Mangement/Client/Pages/AuthenticationLayout.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvQXV0aGVudGljYXRpb25MYXlvdXQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/oladapo/DotNet/Employee Mangement/Client/Pages/Counter.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvQ291bnRlci5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/oladapo/DotNet/Employee Mangement/Client/Pages/DepartmentPages/BranchDialog.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvRGVwYXJ0bWVudFBhZ2VzL0JyYW5jaERpYWxvZy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/oladapo/DotNet/Employee Mangement/Client/Pages/DepartmentPages/BranchPage.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvRGVwYXJ0bWVudFBhZ2VzL0JyYW5jaFBhZ2UucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/oladapo/DotNet/Employee Mangement/Client/Pages/DepartmentPages/DepartmentDialog.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvRGVwYXJ0bWVudFBhZ2VzL0RlcGFydG1lbnREaWFsb2cucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/oladapo/DotNet/Employee Mangement/Client/Pages/DepartmentPages/DepartmentPage.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvRGVwYXJ0bWVudFBhZ2VzL0RlcGFydG1lbnRQYWdlLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/oladapo/DotNet/Employee Mangement/Client/Pages/DepartmentPages/GeneralDepartmentDialog.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvRGVwYXJ0bWVudFBhZ2VzL0dlbmVyYWxEZXBhcnRtZW50RGlhbG9nLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/oladapo/DotNet/Employee Mangement/Client/Pages/DepartmentPages/GeneralDepartmentPage.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvRGVwYXJ0bWVudFBhZ2VzL0dlbmVyYWxEZXBhcnRtZW50UGFnZS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/oladapo/DotNet/Employee Mangement/Client/Pages/Home.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvSG9tZS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/oladapo/DotNet/Employee Mangement/Client/Pages/HomePage.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvSG9tZVBhZ2UucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/oladapo/DotNet/Employee Mangement/Client/Pages/LocationPages/CityDialog.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvTG9jYXRpb25QYWdlcy9DaXR5RGlhbG9nLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/oladapo/DotNet/Employee Mangement/Client/Pages/LocationPages/CityPage.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvTG9jYXRpb25QYWdlcy9DaXR5UGFnZS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/oladapo/DotNet/Employee Mangement/Client/Pages/LocationPages/CountryDialog.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvTG9jYXRpb25QYWdlcy9Db3VudHJ5RGlhbG9nLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/oladapo/DotNet/Employee Mangement/Client/Pages/LocationPages/CountryPage.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvTG9jYXRpb25QYWdlcy9Db3VudHJ5UGFnZS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/oladapo/DotNet/Employee Mangement/Client/Pages/LocationPages/TownDialog.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvTG9jYXRpb25QYWdlcy9Ub3duRGlhbG9nLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/oladapo/DotNet/Employee Mangement/Client/Pages/LocationPages/TownPage.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvTG9jYXRpb25QYWdlcy9Ub3duUGFnZS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/oladapo/DotNet/Employee Mangement/Client/Pages/LoginPage.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvTG9naW5QYWdlLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/oladapo/DotNet/Employee Mangement/Client/Pages/OrganisationPages/EmployeeDetailPage.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvT3JnYW5pc2F0aW9uUGFnZXMvRW1wbG95ZWVEZXRhaWxQYWdlLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/oladapo/DotNet/Employee Mangement/Client/Pages/OrganisationPages/EmployeeForm.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvT3JnYW5pc2F0aW9uUGFnZXMvRW1wbG95ZWVGb3JtLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/oladapo/DotNet/Employee Mangement/Client/Pages/OrganisationPages/EmployeePage.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvT3JnYW5pc2F0aW9uUGFnZXMvRW1wbG95ZWVQYWdlLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/oladapo/DotNet/Employee Mangement/Client/Pages/OrganisationPages/UserDialog.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvT3JnYW5pc2F0aW9uUGFnZXMvVXNlckRpYWxvZy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/oladapo/DotNet/Employee Mangement/Client/Pages/OrganisationPages/UserPage.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvT3JnYW5pc2F0aW9uUGFnZXMvVXNlclBhZ2UucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/oladapo/DotNet/Employee Mangement/Client/Pages/OtherPages/ContextMenu.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvT3RoZXJQYWdlcy9Db250ZXh0TWVudS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/oladapo/DotNet/Employee Mangement/Client/Pages/OtherPages/LoadingSpinner.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvT3RoZXJQYWdlcy9Mb2FkaW5nU3Bpbm5lci5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/oladapo/DotNet/Employee Mangement/Client/Pages/OtherPages/ProfileDropDownPage.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvT3RoZXJQYWdlcy9Qcm9maWxlRHJvcERvd25QYWdlLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/oladapo/DotNet/Employee Mangement/Client/Pages/RegisterPage.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvUmVnaXN0ZXJQYWdlLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/oladapo/DotNet/Employee Mangement/Client/Pages/Weather.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvV2VhdGhlci5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/oladapo/DotNet/Employee Mangement/Client/_Imports.razor]
+build_metadata.AdditionalFiles.TargetPath = X0ltcG9ydHMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/oladapo/DotNet/Employee Mangement/Client/Layout/MainLayout.razor]
+build_metadata.AdditionalFiles.TargetPath = TGF5b3V0L01haW5MYXlvdXQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-v8q5m4zhkd
+
+[/home/oladapo/DotNet/Employee Mangement/Client/Layout/NavMenu.razor]
+build_metadata.AdditionalFiles.TargetPath = TGF5b3V0L05hdk1lbnUucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-d13n4iuesv

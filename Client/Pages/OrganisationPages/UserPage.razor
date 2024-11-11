@@ -1,0 +1,144 @@
+﻿@implements IDisposable
+
+@if (AppState.ShowUser)
+{
+    <div class="container mt-5">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="float-start">Manage Users</h4>
+                </div>
+                <div class="card-header" style="max-height: 580px; overflow-x: hidden; overflow-y: scroll;">
+                    <div class="card-body">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Id</th>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Email</th>
+                                    <th scope="col">Role</th>
+                                    <th scope="col">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (ManageUsers is not null)
+                                    {
+                                        int count = 1;
+                                        foreach (var user in ManageUsers)
+                                        {
+                                            <tr>
+                                                <th scope="row">@count</th>
+                                                <td>@user.UserId</td>
+                                                <td>@user.Name</td>
+                                                <td>@user.Email</td>
+                                                <td>@user.Role</td>
+                                                <td>
+                                                    <i class="bi bi-pencil text-info cursorStyle"
+                                                        @onclick="()=>EditClicked(user)"></i>
+                                                    <i class="bi bi-trash text-danger cursorStyle"
+                                                        @onclick="()=>DeleteClicked(user)"></i>
+                                                </td>
+                                            </tr>
+                                            count++;
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <tr>
+                                            <td colspan="4" class="alert alert-info text-center">No Town added yet</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+<style>
+    .cursorStyle {
+        cursor: pointer;
+    }
+</style>
+<UserDialog @ref="UserDialog" ManageUser="ManageUser" SystemRoles="SystemRoles" HandleSaveOperationEvent="HandleSaveOperationEvent">
+</UserDialog>
+
+
+@code {
+    public string Title { get; set; } = "Add";
+    UserDialog? UserDialog;
+    ManageUser ManageUser = new();
+    public List<ManageUser> ManageUsers { get; set; } = new();
+    public List<SystemRole> SystemRoles { get; set; } = new();
+    protected async override Task OnInitializedAsync()
+    {
+        await GetUsers();
+        await GetRoles();
+        AppState.Action += StateHasChanged;
+    }
+    private async Task GetUsers()
+    {
+        ManageUsers = await UserService.GetUsers();
+    }
+    private async Task GetRoles()
+    {
+        SystemRoles = await UserService.GetRoles();
+    }
+    void AddButtonClicked()
+    {
+        UserDialog?.ChangeTitle("Add");
+        ManageUser = new();
+        OpenDialog();
+    }
+    void OpenDialog()
+    {
+        UserDialog?.OpenDialog();
+    }
+    private async Task HandleSaveOperationEvent(ManageUser user)
+    {
+        bool successCheck = false;
+        var result = await UserService.UpdateUser(user);
+        successCheck = await DisplayMessage(result.Flag, result.Message!);
+
+        if (successCheck)
+        {
+            ManageUser = new();
+            await GetUsers();
+            
+        }
+    }
+    private void EditClicked(ManageUser user)
+    {
+        ManageUser = user;
+        OpenDialog();
+    }
+    private async Task DeleteClicked(ManageUser user)
+    {
+        bool confirm = await DialogService.ConfirmAsync($"Are you sure you want to Delete {user.Name}?", "Confirm Delete");
+        if (!confirm) return;
+        var response = await UserService.DeleteUser(user.UserId);
+        var result = await DisplayMessage(response.Flag, response.Message!);
+        if (result) await GetUsers();
+    }
+    private async Task<bool> DisplayMessage(bool flag, string message)
+    {
+        if (flag)
+        {
+            await DialogService.AlertAsync(message, "Success Operation");
+            return true;
+        }
+        else
+        {
+            await DialogService.AlertAsync(message, "Alert!");
+            return false;
+        }
+    }
+    public void Dispose()
+    {
+        AppState.Action -= StateHasChanged;
+    }
+}

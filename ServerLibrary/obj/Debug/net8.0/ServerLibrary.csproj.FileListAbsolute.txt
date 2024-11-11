@@ -1,0 +1,15 @@
+/home/oladapo/DotNet/Employee Mangement/ServerLibrary/bin/Debug/net8.0/ServerLibrary.deps.json
+/home/oladapo/DotNet/Employee Mangement/ServerLibrary/bin/Debug/net8.0/ServerLibrary.dll
+/home/oladapo/DotNet/Employee Mangement/ServerLibrary/bin/Debug/net8.0/ServerLibrary.pdb
+/home/oladapo/DotNet/Employee Mangement/ServerLibrary/obj/Debug/net8.0/ServerLibrary.GeneratedMSBuildEditorConfig.editorconfig
+/home/oladapo/DotNet/Employee Mangement/ServerLibrary/obj/Debug/net8.0/ServerLibrary.AssemblyInfoInputs.cache
+/home/oladapo/DotNet/Employee Mangement/ServerLibrary/obj/Debug/net8.0/ServerLibrary.AssemblyInfo.cs
+/home/oladapo/DotNet/Employee Mangement/ServerLibrary/obj/Debug/net8.0/ServerLibrary.csproj.CoreCompileInputs.cache
+/home/oladapo/DotNet/Employee Mangement/ServerLibrary/obj/Debug/net8.0/ServerLibrary.dll
+/home/oladapo/DotNet/Employee Mangement/ServerLibrary/obj/Debug/net8.0/refint/ServerLibrary.dll
+/home/oladapo/DotNet/Employee Mangement/ServerLibrary/obj/Debug/net8.0/ServerLibrary.pdb
+/home/oladapo/DotNet/Employee Mangement/ServerLibrary/obj/Debug/net8.0/ref/ServerLibrary.dll
+/home/oladapo/DotNet/Employee Mangement/ServerLibrary/bin/Debug/net8.0/BaseLibrary.dll
+/home/oladapo/DotNet/Employee Mangement/ServerLibrary/bin/Debug/net8.0/BaseLibrary.pdb
+/home/oladapo/DotNet/Employee Mangement/ServerLibrary/obj/Debug/net8.0/ServerLibrary.csproj.AssemblyReference.cache
+/home/oladapo/DotNet/Employee Mangement/ServerLibrary/obj/Debug/net8.0/ServerLi.AF94C59E.Up2Date

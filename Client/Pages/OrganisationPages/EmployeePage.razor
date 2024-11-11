@@ -1,0 +1,226 @@
+﻿@implements IDisposable
+@if (AppState.ShowEmployee)
+{
+    if (ShowMainPage)
+    {
+        <div class="container-fluid mt-5">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-header"><button class="btn btn-outline-success" @onclick="ShowEmployeeForm">
+                        <i class="bi bi-plus-circle-dotted"></i>Add Employee
+                    </button></div>
+                <div class="card-body">
+                    @{
+                        var tool = (new List<string>() {"Search", "PdfExport", "ExcelExport", "Print"});
+                    }
+                    <SfGrid DataSource="@Employees" AllowPaging="true" AllowSorting="true" Toolbar="@tool"
+                    AllowExcelExport="true" @ref="DefaultGrid" AllowPdfExport="true">
+                    <GridEvents OnToolbarClick="ToolbarClickHandler" TValue="Employee"></GridEvents>
+                        <GridColumns>
+                            <GridColumn HeaderText="Employee Image">
+                                <Template>
+                                    @{
+                                                var employee = (context as Employee);
+                                                <div class="image">
+                                                    <img src="@employee!.Photo" alt="@employee!.Name" width="150" height="150">
+                                                </div>
+                                            }
+                                        </Template>
+                                    </GridColumn>
+                                    <GridColumn Field="@nameof(Employee.CivilId)" HeaderText="Civil Id"></GridColumn>
+                                    <GridColumn Field="@nameof(Employee.FileNumber)" HeaderText="File Number"></GridColumn>
+                                    <GridColumn Field="@nameof(Employee.Name)" HeaderText="Name"></GridColumn>
+                                    <GridColumn Field="@nameof(Employee.TelephoneNumber)" HeaderText="Telephone"></GridColumn>
+                                    <GridColumn Field="@nameof(Employee.JobName)" HeaderText="Job Name"></GridColumn>
+                                    <GridColumn Field="@nameof(Employee.Branch.Name)" HeaderText="Branch Name"></GridColumn>
+                                    <GridColumn Field="@nameof(Employee.Town.Name)" HeaderText="Town Name"></GridColumn>
+                                    <GridColumn HeaderText="Menu" HeaderTextAlign="TextAlign.Left">
+                                        <Template>
+                                            @{
+                                                var employee = (context as Employee);
+                                                <i class="bi bi-menu-down text-primary" id="cursorStyle"
+                                                    @onclick="()=>ShowMenuPopUp(employee!)"></i>
+                                            }
+                                        </Template>
+                                    </GridColumn>
+                                </GridColumns>
+                            </SfGrid>
+                        </div>
+                        <div class="card-footer"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+}
+<EmployeeForm @ref="EmployeeForm" ShowAddOrUpdate="ShowForm" Employee="Employee" Branches="SelectedBranches"
+    Cities="SelectedCities" Countries="Countries" Towns="SelectedTowns" Departments="SelectedDepartments"
+    HandleCitySelectEvent="HandleCitySelectEvent" HandleCountrySelectEvent="HandleCountrySelectEvent"
+    HandleDepartmentSelectEvent="HandleDepartmentSelectEvent" GeneralDepartments="GeneralDepartments"
+    HandleGeneralDepartmentSelectEvent="HandleGeneralDepartmentSelectEvent"
+    HandleSaveEmployeeEvent="HandleSaveEmployeeEvent" NotifyFormClosed="NotifyFormClosed" />
+<ContextMenu @ref="contextMenu" HandleDeleteClicked="DeleteClicked" HandleEditClicked="EditClicked"
+    HandleViewClicked="ViewClicked" ></ContextMenu>
+    @* <ContextMenu @ref="contextMenu" HandleDeleteClicked="DeleteClicked" HandleEditClicked="EditClicked"
+    HandleViewClicked="ViewClicked" HandleAddHealthClicked="AddHealthClicked"
+    HandleAddOvertimeClicked="AddOvertimeClicked" HandleAddSanctionClicked="AddSanctionClicked"
+    HandleAddVacationClicked="AddVacationClicked"></ContextMenu> *@
+
+    <EmployeeDetailPage EmployeeDetails="Employee" ShowDetailPage="ShowDetailPage"
+     HandleCloseDetailPageClicked="HandleCloseDetailPageClicked"></EmployeeDetailPage>
+
+@code {
+    private SfGrid<Employee>? DefaultGrid;
+    EmployeeForm? EmployeeForm;
+    public Employee Employee { get; set; } = new();
+    public Employee SelectedEmployee { get; set; } = new();
+    public List<Employee> Employees { get; set; } = [];
+    public List<GenaralDepartement> GeneralDepartments { get; set; } = [];
+    public List<Department> Departments { get; set; } = [];
+    public List<Branch> Branches { get; set; } = [];
+    public List<Country> Countries { get; set; } = [];
+    public List<City> Cities { get; set; } = [];
+    public List<Town> Towns { get; set; } = [];
+    public List<Department> SelectedDepartments { get; set; } = [];
+    public List<Branch> SelectedBranches { get; set; } = [];
+    public List<City> SelectedCities { get; set; } = [];
+    public List<Town> SelectedTowns { get; set; } = [];
+    public bool ShowMainPage { get; set; } = true;
+    public bool ShowForm { get; set; } = false;
+    public bool ShowDetailPage {get; set;} = false;
+    ContextMenu? contextMenu;
+    protected async override Task OnInitializedAsync()
+    {
+        AppState.Action += StateHasChanged;
+        await LoadDefaults();
+        await LoadEmployees();
+    }
+    public async Task NotifyFormClosed()
+    {
+        ShowMainPage = true;
+        ShowForm = false;
+        await LoadEmployees();
+        SelectedEmployee = new();
+    }
+    private async Task LoadEmployees()
+    {
+        Employees = await EmployeeService.GetAll(BaseUrl.EmployeeUrl);
+    }
+    private async Task LoadDefaults()
+    {
+        Countries = await CountryService.GetAll(BaseUrl.CountryUrl);
+        Cities = await CityService.GetAll(BaseUrl.CityUrl);
+        Towns = await TownService.GetAll(BaseUrl.TownUrl);
+
+        GeneralDepartments = await GenaralDepartementService.GetAll(BaseUrl.GenaralDepartementUrl);
+        Departments = await DepartementService.GetAll(BaseUrl.DepartementUrl);
+        Branches = await BranchService.GetAll(BaseUrl.BranchUrl);
+    }
+    void ShowMenuPopUp(Employee employee)
+    {
+        SelectedEmployee = employee;
+        contextMenu!.OpenContextMenu();
+    }
+    void EditClicked()
+    {
+        EmployeeForm.Employee.Id = SelectedEmployee.Id;
+        EmployeeForm.EmployeeGroup1.Name = SelectedEmployee.Name;
+        EmployeeForm.EmployeeGroup1.TelephoneNumber = SelectedEmployee.TelephoneNumber;
+        EmployeeForm.EmployeeGroup1.FileNumber = SelectedEmployee.FileNumber;
+        EmployeeForm.EmployeeGroup1.Address = SelectedEmployee.Address;
+        EmployeeForm.EmployeeGroup1.Photo = SelectedEmployee.Photo;
+        EmployeeForm.EmployeeGroup1.CivilId = SelectedEmployee.CivilId;
+
+        EmployeeForm.EmployeeGroup2.JobName = SelectedEmployee.JobName;
+        EmployeeForm.EmployeeGroup2.Other = SelectedEmployee.Other;
+
+        EmployeeForm.GeneralDepartment = SelectedEmployee.Branch.Department.GeneralDepartment.Name;
+        EmployeeForm.Department = SelectedEmployee.Branch.Department.Name;
+        EmployeeForm.Branch = SelectedEmployee.Branch.Name;
+
+        EmployeeForm.Country = SelectedEmployee.Town.City.Country.Name;
+        EmployeeForm.City = SelectedEmployee.Town.City.Name;
+        EmployeeForm.Town = SelectedEmployee.Town.Name;
+
+        EmployeeForm.Title = "Update";
+        SelectedEmployee = new();
+        contextMenu.CloseContextMenu();
+        ShowForm = true;
+        ShowMainPage = false;
+
+    }
+    private async Task DeleteClicked(){
+        contextMenu!.CloseContextMenu();
+        bool confirm = await DialogService.ConfirmAsync($"Are you sure you want to delete {SelectedEmployee.Name}", "Confirm Delete");
+        if(!confirm) return;
+        var response = await EmployeeService.Delete(BaseUrl.EmployeeUrl, SelectedEmployee.Id);
+        var result = await DisplayMessage(response.Flag, response.Message);
+        if( result){
+            SelectedEmployee = new();
+            await LoadEmployees();
+        }
+    }
+    private void ViewClicked(){
+        Employee = SelectedEmployee;
+        contextMenu.CloseContextMenu();
+        ShowDetailPage = true;
+        ShowMainPage = false;
+        SelectedEmployee = new();
+    }
+    void HandleCloseDetailPageClicked(){
+        ShowDetailPage = false;
+        ShowMainPage = true;
+        @* SelectedEmployee = new(); *@
+    }
+    private void HandleCountrySelectEvent(int id) => SelectedCities = Cities.Where(c => c.CountryId == id).ToList();
+    private void HandleCitySelectEvent(int id) => SelectedTowns = Towns.Where(c => c.CityId == id).ToList();
+    private void HandleGeneralDepartmentSelectEvent(int id) => SelectedDepartments = Departments.Where(c =>
+    c.GeneralDepartmentId == id).ToList();
+    private void HandleDepartmentSelectEvent(int id) => SelectedBranches = Branches.Where(c => c.DepartmentId ==
+    id).ToList();
+
+    async Task HandleSaveEmployeeEvent(Employee employee)
+    {
+        bool successCheck = false;
+        if (employee.Id > 0)
+        {
+            var result = await EmployeeService.Update(BaseUrl.EmployeeUrl, employee);
+            successCheck = await DisplayMessage(result.Flag, result.Message);
+        }
+        else
+        {
+            var result = await EmployeeService.Insert(BaseUrl.EmployeeUrl, employee);
+            successCheck = await DisplayMessage(result.Flag, result.Message);
+        }
+        if (successCheck) EmployeeForm.ClearContent();
+    }
+    private void ShowEmployeeForm()
+    {
+        ShowMainPage = false;
+        ShowForm = true;
+    }
+    private async Task<bool> DisplayMessage(bool flag, string message)
+    {
+        if (flag)
+        {
+            await DialogService.AlertAsync(message, "Success Operation");
+            return true;
+        }
+        else
+        {
+            await DialogService.AlertAsync(message, "Alert!");
+            return false;
+        }
+    }
+
+    // Excell export/ pdf export
+    public async Task ToolbarClickHandler(Syncfusion.Blazor.Navigations.ClickEventArgs args){
+        if(args.Item.Text == "Excel Export")
+        await this.DefaultGrid!.ExportToExcelAsync();
+        if( args.Item.Text == "PDF Export")
+        await this.DefaultGrid!.ExportToPdfAsync();
+    }
+
+    public void Dispose() => AppState.Action -= StateHasChanged;
+}

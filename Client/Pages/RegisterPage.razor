@@ -1,0 +1,84 @@
+﻿@page "/identity/account/register"
+@layout AuthenticationLayout
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-4"></div>
+        <div class="col-lg-4">
+            <EditForm Enhance Model="@User" OnValidSubmit="HandleSubmit">
+                <DataAnnotationsValidator />
+
+                <div class="card bg-dark main-card">
+                    <div class="card-header">Fill this form to Register</div>
+                    <div class="card-body">
+                        <div class="form-group mt-3">
+                            <label for="fullname" class="form-label">Fullname:</label>
+                            <InputText @bind-Value="User.Fullname" class="form-control" id="fullname"></InputText>
+                        </div>
+                        <div class="form-group mt-3">
+                            <label for="email" class="form-label">Email:</label>
+                            <InputText @bind-Value="User.Email" class="form-control" id="email"></InputText>
+                        </div>
+                        <div class="form-group mt-3">
+                            <label for="password" class="form-label">Password:</label>
+                            <input type="password" @bind="User.Password" class="form-control" id="password" />
+                        </div>
+                        <div class="form-group mt-3">
+                            <label for="confirm-password" class="form-label">Confirm Password:</label>
+                            <input type="password" @bind="User.ConfirmPassword" class="form-control"
+                                id="confirm-password" />
+                        </div>
+                        <div class="form-group mt-3">
+                            @if (ShowSpinner)
+                            {
+                                <LoadingSpinner />
+                            }
+                            else
+                            {
+                                <button class="btn btn-outline-primary float-end" type="submit">Register</button>
+                            }
+
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <span class="text-center">
+                            Already have an account? <a href="identity/account/login" class="btn-link">Login</a>
+                        </span>
+                        <ValidationSummary />
+                    </div>
+                </div>
+            </EditForm>
+        </div>
+        <div class="col-lg-4"></div>
+    </div>
+</div>
+
+<style>
+    .main-card {
+        opacity: 0.5;
+        margin-top: 50%;
+        border-radius: 10px;
+        color: white;
+        font-weight: bold;
+    }
+</style>
+
+@code {
+    public bool ShowSpinner { get; set; } = false;
+    Register User = new();
+    async Task HandleSubmit()
+    {
+        ShowSpinner = true;
+        var result = await UserService.CreateAsync(User);
+        if (result.Flag)
+            User = new();
+            else 
+            await DisplayDialog(result.Message!, "Alert!");
+
+        ShowSpinner = false;
+
+    }
+        private async Task DisplayDialog(string content, string title){
+        await DialogService.AlertAsync(content, title);
+    }
+}

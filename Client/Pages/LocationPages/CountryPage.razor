@@ -1,0 +1,130 @@
+﻿@implements IDisposable
+
+@if (AppState.ShowCountry)
+{
+    <div class="container mt-5">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="float-start">Countries</h4>
+                    <button class="btn btn-outline-success float-end" @onclick="OpenDialog"><i
+                            class="bi bi-plus-circle-dotted"></i>Add Department</button>
+                </div>
+                <div class="card-header" style="max-height: 580px; overflow-x: hidden; overflow-y: scroll;">
+                    <div class="card-body">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Id</th>
+                                    <th scope="col">Country</th>
+                                    <th scope="col">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if(Countries is not null){
+                                    int count = 1;
+                                    foreach(var country in Countries){
+                                        <tr>
+                                            <th scope="row">@count</th>
+                                            <td>@country.Id</td>
+                                            <td>@country.Name</td>
+                                            <td>
+                                                <i class="bi bi-pencil text-info" id="cursorStyle" @onclick="()=>EditClicked(country)"></i>
+                                                <i class="bi bi-trash text-danger" id="cursorStyle" @onclick="()=>DeleteClicked(country)"></i>
+                                            </td>
+                                        </tr>
+                                        count++;
+                                    }
+                                }else{
+                                    <tr>
+                                        <td colspan="4" class="alert alert-info text-center">No country added yet</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+}
+<CountryDialog @ref="CountryDialog" HandleSaveOperationEvent="HandleSaveOperationEvent"
+    Country="Country" />
+
+    <style>
+        #cursorStyle{
+            cursor: pointer;
+        }
+    </style>
+@code {
+    CountryDialog? CountryDialog;
+    Country Country = new();
+    public string Title { get; set; } = "Add";
+    public List<Country> Countries { get; set; } = new();
+    protected async override Task OnInitializedAsync()
+    {
+        await GetCountries();
+        AppState.Action += StateHasChanged;
+    }
+    void OpenDialog()
+    {
+        CountryDialog?.OpenDialog();
+    }
+    public void Dispose()
+    {
+        AppState.Action -= StateHasChanged;
+    }
+    private async Task GetCountries()
+    {
+        Countries = await CountryService.GetAll(BaseUrl.CountryUrl);
+    }
+    private void EditClicked(Country country){
+        CountryDialog?.ChangeTitle("Edit");
+        Country = country;
+        OpenDialog();
+    }
+    private async void DeleteClicked(Country country){
+        bool confirm = await DialogService.ConfirmAsync($"Are you sure you want to Delete {country.Name}?", "Confirm Delete");
+        if(!confirm) return;
+        var response = await CountryService.Delete(BaseUrl.CountryUrl, country.Id);
+        var successCheck = await DisplayMessage(response.Flag, response.Message!);
+        if(successCheck) await GetCountries();
+    }
+    private async Task HandleSaveOperationEvent(Country country)
+    {
+        bool successCheck = false;
+        if (country.Id > 0)
+        {
+            var result = await CountryService.Update(BaseUrl.CountryUrl, country);
+            successCheck = await DisplayMessage(result.Flag, result.Message!);
+        }
+        else
+        {
+            var result = await CountryService.Insert(BaseUrl.CountryUrl, country);
+            successCheck = await DisplayMessage(result.Flag, result.Message!);
+        }
+        if (successCheck)
+        {
+            Country = new();
+            await GetCountries();
+            CountryDialog?.ChangeTitle("Add");
+        }
+    }
+    private async Task<bool> DisplayMessage(bool flag, string message)
+    {
+        if (flag)
+        {
+            await DialogService.AlertAsync(message, "Success operation");
+            return true;
+        }
+        else
+        {
+            await DialogService.AlertAsync(message, "Alert!");
+            return false;
+        }
+    }
+}

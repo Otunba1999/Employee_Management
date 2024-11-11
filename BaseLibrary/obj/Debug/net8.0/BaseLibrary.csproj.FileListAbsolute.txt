@@ -1,0 +1,12 @@
+/home/oladapo/DotNet/Employee Mangement/BaseLibrary/bin/Debug/net8.0/BaseLibrary.deps.json
+/home/oladapo/DotNet/Employee Mangement/BaseLibrary/bin/Debug/net8.0/BaseLibrary.dll
+/home/oladapo/DotNet/Employee Mangement/BaseLibrary/bin/Debug/net8.0/BaseLibrary.pdb
+/home/oladapo/DotNet/Employee Mangement/BaseLibrary/obj/Debug/net8.0/BaseLibrary.csproj.AssemblyReference.cache
+/home/oladapo/DotNet/Employee Mangement/BaseLibrary/obj/Debug/net8.0/BaseLibrary.GeneratedMSBuildEditorConfig.editorconfig
+/home/oladapo/DotNet/Employee Mangement/BaseLibrary/obj/Debug/net8.0/BaseLibrary.AssemblyInfoInputs.cache
+/home/oladapo/DotNet/Employee Mangement/BaseLibrary/obj/Debug/net8.0/BaseLibrary.AssemblyInfo.cs
+/home/oladapo/DotNet/Employee Mangement/BaseLibrary/obj/Debug/net8.0/BaseLibrary.csproj.CoreCompileInputs.cache
+/home/oladapo/DotNet/Employee Mangement/BaseLibrary/obj/Debug/net8.0/BaseLibrary.dll
+/home/oladapo/DotNet/Employee Mangement/BaseLibrary/obj/Debug/net8.0/refint/BaseLibrary.dll
+/home/oladapo/DotNet/Employee Mangement/BaseLibrary/obj/Debug/net8.0/BaseLibrary.pdb
+/home/oladapo/DotNet/Employee Mangement/BaseLibrary/obj/Debug/net8.0/ref/BaseLibrary.dll

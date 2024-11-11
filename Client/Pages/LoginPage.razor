@@ -1,0 +1,82 @@
+@page "/identity/account/login"
+@layout AuthenticationLayout
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-4"></div>
+        <div class="col-lg-4">
+            <EditForm Enhance Model="@User" OnValidSubmit="HandleSubmit">
+                <DataAnnotationsValidator />
+
+                <div class="card bg-dark main-card">
+                    <div class="card-header text-center fs-5 mb-2">Login</div>
+                    <div class="card-body">
+                        <div class="form-group mt-3">
+                            <label for="email" class="form-label">Email:</label>
+                            <InputText @bind-Value="User.Email" class="form-control" id="email"></InputText>
+                        </div>
+                        <div class="form-group mt-3">
+                            <label for="password" class="form-label">Password:</label>
+                            <input type="password" @bind="User.Password" class="form-control" id="password" />
+                        </div>
+                        <div class="form-group mt-3">
+                            @if (ShowSpinner)
+                            {
+                                <LoadingSpinner />
+                            }
+                            else
+                            {
+                                <button class="btn btn-outline-primary float-end" type="submit">Login</button>
+                            }
+
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <span class="text-center">
+                            Dont't have account? <a href="identity/account/register" class="btn-link">SignUp</a>
+                        </span>
+                        <ValidationSummary />
+                    </div>
+                </div>
+
+            </EditForm>
+
+        </div>
+        <div class="col-lg-4"></div>
+    </div>
+</div>
+<style>
+    .main-card {
+        opacity: 0.5;
+        margin-top: 50%;
+        border-radius: 10px;
+        color: white;
+        font-weight: bold;
+    }
+</style>
+
+@code {
+    public bool ShowSpinner { get; set; } = false;
+    Login User = new();
+    async Task HandleSubmit()
+    {
+        ShowSpinner = true;
+        var result = await UserService.LoginAsync(User);
+        if (result.Flag)
+        {
+            var customAuthStateProvider = (CustomAuthStateProvider)AuthStateProvider;
+            await customAuthStateProvider.UpdateAuthenticationState(new UserSession()
+                {
+                    Token = result.Token,
+                    RefreshToken = result.RefreshToken
+                });
+            NavManager.NavigateTo("/", forceLoad: true);
+        }else {
+            await DisplayDialog(result.Message!, "Alert!");
+        }
+        ShowSpinner = false;
+    }
+    private async Task DisplayDialog(string content, string title){
+        await DialogService.AlertAsync(content, title);
+    }
+} 

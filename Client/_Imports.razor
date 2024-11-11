@@ -1,0 +1,43 @@
+﻿@using System.Net.Http
+@using System.Net.Http.Json
+@using Microsoft.AspNetCore.Components.Forms
+@using Microsoft.AspNetCore.Components.Routing
+@using Microsoft.AspNetCore.Components.Web
+@using Microsoft.AspNetCore.Components.Web.Virtualization
+@using Microsoft.AspNetCore.Components.WebAssembly.Http
+@using Microsoft.JSInterop
+@using Client
+@using Client.Layout
+
+@using BaseLibrary.DTOs
+@using BaseLibrary.Entities
+@using ClientLibrary.Helpers
+@using ClientLibrary.Services.Interfaces
+@using Microsoft.AspNetCore.Components.Authorization
+@using Microsoft.AspNetCore.Authorization
+@using Client.Pages
+@using Client.Pages.OtherPages
+@using Client.Pages.AdminPages
+@using Client.Pages.DepartmentPages
+@using Client.Pages.LocationPages
+@using Client.Pages.OrganisationPages
+@using Syncfusion.Blazor.Popups
+@using Syncfusion.Blazor.Buttons
+@using Syncfusion.Blazor.DropDowns
+@using Syncfusion.Blazor.Grids
+@using Client.ApplicationState
+
+
+@inject AuthenticationStateProvider AuthStateProvider
+@inject IUserService UserService
+@inject NavigationManager NavManager
+@inject SfDialogService DialogService
+@inject AppState AppState
+
+@inject IGenericService<GenaralDepartement> GenaralDepartementService
+@inject IGenericService<Department> DepartementService
+@inject IGenericService<Branch> BranchService
+@inject IGenericService<Country> CountryService
+@inject IGenericService<City> CityService
+@inject IGenericService<Town> TownService
+@inject IGenericService<Employee> EmployeeService
